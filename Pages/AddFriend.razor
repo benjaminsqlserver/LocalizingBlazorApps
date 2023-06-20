@@ -1,0 +1,40 @@
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddFriend> L
+@page "/add-friend"
+
+<PageTitle>@L["PageTitle.Text"]</PageTitle>
+    <RadzenColumn SizeMD=12>
+        <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Cannot save Friend</RadzenAlert>
+        <RadzenTemplateForm TItem="MyFriendsApp.Models.ConData.Friend" Data="@friend" Visible="@(friend != null)" Submit="@FormSubmit">
+            <RadzenRow style="margin-bottom: 1rem">
+                <RadzenColumn SizeMD="3">
+                    <RadzenLabel Text="@L["lblFriends.Text"]" Component="FirstName" style="width: 100%" />
+                </RadzenColumn>
+                <RadzenColumn SizeMD="9">
+                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@friend.FirstName" Name="FirstName" />
+                    <RadzenRequiredValidator Component="FirstName" Text="@L["rqFirstName.Text"]" />
+                </RadzenColumn>
+            </RadzenRow>
+            <RadzenRow style="margin-bottom: 1rem">
+                <RadzenColumn SizeMD="3">
+                <RadzenLabel Text="@L["lblLastName.Text"]" Component="LastName" style="width: 100%" />
+                </RadzenColumn>
+                <RadzenColumn SizeMD="9">
+                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@friend.LastName" Name="LastName" />
+                <RadzenRequiredValidator Component="LastName" Text="@L["rqLastName.Text"]" />
+                </RadzenColumn>
+            </RadzenRow>
+            <RadzenRow style="margin-bottom: 1rem">
+                <RadzenColumn SizeMD="3">
+                <RadzenLabel Text="@L["lblDateOfBirth.Text"]" Component="DateOfBirth" style="width: 100%" />
+                </RadzenColumn>
+                <RadzenColumn SizeMD="9">
+                    <RadzenDatePicker DateFormat="dd/MM/yyyy" style="display: block; width: 100%" @bind-Value="@friend.DateOfBirth" Name="DateOfBirth" />
+                </RadzenColumn>
+            </RadzenRow>
+          <RadzenStack  Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+            <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="@L["btnRegister.Text"]" Variant="Variant.Flat" />
+            <RadzenButton ButtonStyle="ButtonStyle.Light" Text="@L["btnCancel.Text"]" Variant="Variant.Flat" Click="@CancelButtonClick" />
+          </RadzenStack>
+        </RadzenTemplateForm>
+    </RadzenColumn>
+
